@@ -28,17 +28,20 @@ python emotion_train.py --dataset data/fer2013 --checkpoint ckpt/CapsuleNet -b 1
 
 
 ## Test summary
+
 all network run 70 epochs.
-|Network		|optimizer	|learning rate	|acc	|val_acc	|
-|---------------|-----------|---------------|-------|-----------|
-|VGG16			|adam		|0.0001			|89%	|64%		|
-|VGG19			|adam		|0.0001			|89%	|64%		|
-|ResNet50		|adam		|0.0001			|75%	|50%		|
-|DenseNet121	|adam		|0.0001			|91%	|55%		|
-|DenseNet201	|adam		|0.0001			|92%	|55%		|
-|MobileNetV2	|adam		|0.0001			|65%	|47%		|
-|CapsuleNet		|adam		|0.0001			|95%	|66%		|
-|CapsuleResNet	|adam		|0.0001			|88%	|63%			|
-|DenseNet201	|adam		|0.002			|88%	|63%		|
-|CapsuleResNet	|adam		|0.0005			|86%	|64%		|
-|VGG16			|sgd		|0.01			|93%	|62%		|
+
+| Network		| optimizer	| learning rate	| acc	| val_acc	|
+| --------- | --------- | ------------- | --- | ------- |
+| VGG16			| adam		| 0.0001			| 89%	| 64%		|
+| VGG19			| adam		| 0.0001			| 89%	| 64%		|
+| ResNet50		| adam		| 0.0001			| 75%	| 50%		|
+| DenseNet121	| adam		| 0.0001			| 91%	| 55%		|
+| DenseNet201	| adam		| 0.0001			| 92%	| 55%		|
+| MobileNetV2	| adam		| 0.0001			| 65%	| 47%		|
+| CapsuleNet		| adam		| 0.0001			| 95%	| 66%		|
+| CapsuleResNet	| adam		| 0.0001			| 88%	| 63%			|
+| DenseNet201	| adam		| 0.002			| 88%	| 63%		|
+| CapsuleResNet	| adam		| 0.0005			| 86%	| 64%		|
+| VGG16			| sgd		| 0.01			|93%	| 62%		|
+
