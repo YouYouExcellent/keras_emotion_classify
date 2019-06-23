@@ -27,7 +27,7 @@ python emotion_train.py --dataset data/fer2013 --checkpoint ckpt/CapsuleNet -b 1
 ![](https://github.com/YouYouExcellent/keras_emotion_classify/blob/master/fer2013_summary.png)
 
 
-## Test results
+## Results
 
 all networks run 70 epochs.
 
