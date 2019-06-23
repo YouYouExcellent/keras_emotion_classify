@@ -42,6 +42,7 @@ all networks run 70 epochs.
 | CapsuleNet		| adam		| 0.0001			| 95%	| 66%		|
 | CapsuleResNet	| adam		| 0.0001			| 88%	| 63%			|
 | DenseNet201	| adam		| 0.002			| 88%	| 63%		|
+| CapsuleNet		| adam		| 0.0005			| 92%	| 65%		|
 | CapsuleResNet	| adam		| 0.0005			| 86%	| 64%		|
 | VGG16			| sgd		| 0.01			|93%	| 62%		|
 
