@@ -39,14 +39,18 @@ class Emotion(common.COMMON):
         else:
             files = os.listdir(self.checkpoint)
             self.ckpt_exist = 'model.h5' in files
+        self.class_num = self.get_classes_count()
+
+    def get_classes_count(self):
+        return len(os.listdir(os.path.join(self.dataset, 'train')))
 
     def build_model(self):
         input_size = (self.image_size, self.image_size, self.channel)
         self.log_info('Model: {}'.format(self.network))
         if self.network == 'CapsuleNet':
-            self.model = CapsuleNet(input_size, len(emotions))()
+            self.model = CapsuleNet(input_size, self.class_num)()
         elif self.network == 'CapsuleResNet':
-            self.model = CapsuleResNet(input_size, len(emotions))()
+            self.model = CapsuleResNet(input_size, self.class_num)()
         else:
             base_model = getattr(keras.applications, self.network)(include_top=False,
                                                                    weights=None,
@@ -54,7 +58,7 @@ class Emotion(common.COMMON):
                                                                    pooling="avg")
 
         if self.network not in ['CapsuleNet', 'CapsuleResNet']:
-            emotion = Dense(units=len(emotions), kernel_initializer="he_normal", use_bias=False,
+            emotion = Dense(units=self.class_num, kernel_initializer="he_normal", use_bias=False,
                             activation="softmax", name="emotion")(base_model.output)
             self.model = Model(inputs=base_model.input, outputs=emotion)
 

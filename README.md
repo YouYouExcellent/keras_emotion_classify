@@ -10,8 +10,11 @@ a keras implement of emotion classifier.
 * cuda 10.0.130
 * cudnn 7.5.1
 
+## DATASETs
 
-## How to run?
+### FER2013 dataset
+
+#### How to run?
 1. Download dataset fer2013.tar.gz.
 2. process dataset.
 ```sh
@@ -23,11 +26,11 @@ python emotion_train.py --dataset data/fer2013 --checkpoint ckpt/CapsuleNet -b 1
 ```
 
 
-## Dataset summary
+#### Dataset summary
 ![](https://github.com/YouYouExcellent/keras_emotion_classify/blob/master/fer2013_summary.png)
 
 
-## Results
+#### Results
 
 all networks run 70 epochs.
 
@@ -45,4 +48,37 @@ all networks run 70 epochs.
 | CapsuleNet		| adam		| 0.0005			| 92%	| 65%		|
 | CapsuleResNet	| adam		| 0.0005			| 86%	| 64%		|
 | VGG16			| sgd		| 0.01			|93%	| 62%		|
+
+### FERPLUS dataset
+
+#### How to run?
+1. Download dataset FERPlus.
+```sh
+git clone https://github.com/microsoft/FERPlus.git
+```
+2. process dataset.
+```sh
+cd FERPlus/src
+python generate_training_data.py -d /dst/dataset/path/ferplus -fer you/fer2013/dataset/path/fer2013.csv -ferplus ../fer2013new.csv
+cd you/own/path/keras_emotion_classify
+python prepare_ferplus_data.py --image /dst/dataset/path/ferplus --label FERPlus/data --dst final/dst/path
+
+```
+3. train your model.
+```sh
+python emotion_train.py --dataset final/dst/path --checkpoint ckpt/CapsuleNet -b 128 --network CapsuleNet
+```
+
+
+#### Dataset summary
+![](https://github.com/YouYouExcellent/keras_emotion_classify/blob/master/ferplus_summary.png)
+
+
+#### Results
+
+all networks run 70 epochs.
+
+| Network		| optimizer	| learning rate	| acc	| val_acc	|
+| --------- | --------- | ------------- | --- | ------- |
+| CapsuleNet	| adam		| 0.0001		| 96%	| 82%		|
 

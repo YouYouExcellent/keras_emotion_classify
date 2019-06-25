@@ -102,7 +102,7 @@ class CapsuleNet(object):
         cnn = Conv2D(512, (5, 5), padding='same', activation='relu')(cnn)
         cnn = Conv2D(512, (5, 5), padding='same', activation='relu')(cnn)
         cnn = Reshape((-1, 512))(cnn)
-        capsule = Capsule(7, 16, 3, True)(cnn)
+        capsule = Capsule(self.class_num, 16, 3, True)(cnn)
         output = Lambda(lambda x: K.sqrt(K.sum(K.square(x), 2)), output_shape=(self.class_num,))(capsule)
         
         model = Model(inputs=input_image, outputs=output)
