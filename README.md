@@ -81,4 +81,4 @@ all networks run 70 epochs.
 | Network		| optimizer	| learning rate	| acc	| val_acc	|
 | --------- | --------- | ------------- | --- | ------- |
 | CapsuleNet	| adam		| 0.0001		| 96%	| 82%		|
-
+| VGG16	| adam		| 0.0001		| 95%	| 81%		|
