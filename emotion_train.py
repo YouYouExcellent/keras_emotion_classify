@@ -5,12 +5,13 @@ import common
 import logging
 import numpy as np
 import keras.applications
+from keras import losses
 from keras.models import Model
 from keras.layers import Dense
 from keras.models import load_model
 from capsule_net import CapsuleNet, CapsuleResNet, Capsule
 from keras import backend as K
-from keras.optimizers import SGD, Adam
+from keras.optimizers import SGD, Adam, Nadam
 from keras.preprocessing.image import ImageDataGenerator
 
 logging.getLogger().setLevel(logging.INFO)
@@ -67,8 +68,10 @@ class Emotion(common.COMMON):
     def get_optimizer(self):
         if self.optimizer == 'sgd':
             return SGD(lr=self.learning_rate, decay=1e-6, momentum=0.9, nesterov=True)
-        else:
+        elif self.optimizer == 'adam':
             return Adam(lr=self.learning_rate)
+        elif self.optimizer == 'nadam':
+            return Nadam(lr=self.learning_rate)
 
     def read_total_epochs(self, file_path):
         if os.path.exists(file_path):
@@ -112,6 +115,7 @@ class Emotion(common.COMMON):
         train_datagen = ImageDataGenerator(rescale = 1./255,
                                            shear_range = 0.2,
                                            zoom_range = 0.2,
+                                           rotation_range=30,
                                            horizontal_flip=True)
         val_datagen = ImageDataGenerator(rescale = 1./255)
         eval_datagen = ImageDataGenerator(rescale = 1./255)
@@ -143,7 +147,7 @@ class Emotion(common.COMMON):
         try:
             history_fit=self.model.fit_generator(
                             train_generator,
-                            steps_per_epoch=800/(self.batch_size/32),
+                            steps_per_epoch=1600/(self.batch_size/32),
                             epochs=self.epochs,
                             validation_data=val_generator,
                             validation_steps=2000
@@ -191,14 +195,14 @@ def get_args():
                         help="number of epochs")
     parser.add_argument('--lr', '-l', type=float, default=0.0001,
                         help="learning rate")
-    parser.add_argument('--opt', default='adam', choices=['sgd', 'adam'],
+    parser.add_argument('--opt', default='adam', choices=['sgd', 'adam', 'nadam'],
                         help="optimizer: sgd or adam")
     parser.add_argument('--network', '-n', default='CapsuleNet', choices=networks,
                         help="network: {}".format(', '.join(networks)))
     parser.add_argument('--image-size', '-s', type=int, default=48,
                         help="image width or height")
     parser.add_argument('--channel', type=int, default=1,
-                        help="image width or height")
+                        help="image channel number")
     args = parser.parse_args()
     return args
 

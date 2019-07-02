@@ -24,7 +24,7 @@ def softmax(x, axis=-1):
 
 #A Capsule Implement with Pure Keras
 class Capsule(Layer):
-    def __init__(self, num_capsule=7, dim_capsule=16, routings=3, share_weights=True, activation='squash', **kwargs):
+    def __init__(self, num_capsule=8, dim_capsule=16, routings=3, share_weights=True, activation='squash', **kwargs):
         super(Capsule, self).__init__(**kwargs)
         self.num_capsule = num_capsule
         self.dim_capsule = dim_capsule
@@ -153,7 +153,7 @@ class CapsuleResNet(object):
         cnn = self.ResidualBlock(256, cnn)
 
         cnn = Reshape((-1, 256))(cnn)
-        capsule = Capsule(7, 16, 3, True)(cnn)
+        capsule = Capsule(self.class_num, 16, 3, True)(cnn)
         output = Lambda(lambda x: K.sqrt(K.sum(K.square(x), 2)), output_shape=(self.class_num,))(capsule)
         
         model = Model(inputs=input_image, outputs=output)
