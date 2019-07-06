@@ -1,6 +1,9 @@
 # keras_emotion_classify
 a keras implement of emotion classifier.
 
+# 联系作者
+* 邮件: youyou630@163.com
+* QQ: 603722900
 
 ## Test environment
 * python 3.7.3
@@ -15,7 +18,7 @@ a keras implement of emotion classifier.
 ### FER2013 dataset
 
 #### How to run?
-1. Download dataset fer2013.tar.gz.
+1. Download dataset [FER2013](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data).
 2. process dataset.
 ```sh
 python prepare_data.py
